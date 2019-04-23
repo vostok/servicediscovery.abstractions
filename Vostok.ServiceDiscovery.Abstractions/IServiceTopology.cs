@@ -18,10 +18,9 @@ namespace Vostok.ServiceDiscovery.Abstractions
         IReadOnlyList<Uri> Replicas { get; }
 
         /// <summary>
-        /// <para>Returns arbitrary key-value properties associated with application in service discovery registry.</para>
-        /// <para>This properties is typically used as a convenient carrier populated and used by various extensions.</para>
+        /// See <see cref="IServiceTopologyProperties"/>.
         /// </summary>
         [NotNull]
-        IReadOnlyDictionary<string, string> Properties { get; }
+        IServiceTopologyProperties Properties { get; }
     }
 }
