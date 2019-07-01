@@ -3,7 +3,7 @@
 namespace Vostok.ServiceDiscovery.Abstractions
 {
     /// <summary>
-    /// <para>An instance of <see cref="IServiceBeacon"/> is responsible for registering the application in service discovery registry.</para>
+    /// <para>An instance of <see cref="IServiceBeacon"/> is responsible for registering the application in service discovery system.</para>
     /// <para>This is a continuous process: registration is maintained until explicitly stopped (or until application terminates).</para>
     /// <para>Use <see cref="Start"/> method to register and maintain the registration in the background..</para>
     /// <para>Use <see cref="Stop"/> method to unregister.</para>
@@ -11,6 +11,11 @@ namespace Vostok.ServiceDiscovery.Abstractions
     [PublicAPI]
     public interface IServiceBeacon
     {
+        /// <summary>
+        /// Returns current replica info.
+        /// </summary>
+        IReplicaInfo ReplicaInfo { get; }
+
         /// <summary>
         /// <para>Starts the process of maintaining the registration in service discovery system.</para>
         /// <para>Registration is performed asynchronously: it may occur after <see cref="Start"/> method returns.</para>

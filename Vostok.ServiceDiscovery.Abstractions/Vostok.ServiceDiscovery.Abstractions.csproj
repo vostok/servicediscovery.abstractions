@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
+
 <Project Sdk="Microsoft.NET.Sdk">
-  
+
   <Import Project="..\..\vostok.devtools\library-common-props\Main-Project.props" />
   <Import Project="..\..\vostok.devtools\git-commit-to-assembly-title\Vostok.Tools.GitCommit2AssemblyTitle.props" />
 
@@ -26,5 +27,5 @@
     <PackageReleaseNotes>https://github.com/vostok/servicediscovery.abstractions/blob/master/CHANGELOG.md</PackageReleaseNotes>
     <RepositoryUrl>https://github.com/vostok/servicediscovery.abstractions</RepositoryUrl>
   </PropertyGroup>
-  
+
 </Project>
