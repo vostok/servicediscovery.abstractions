@@ -11,21 +11,28 @@ namespace Vostok.ServiceDiscovery.Abstractions
         [NotNull]
         Task<IReadOnlyList<string>> GetAllEnvironmentsAsync();
 
+        [CanBeNull]
+        Task<IEnvironmentInfo> GetEnvironmentAsync([NotNull] string environment);
+
+        Task<bool> TryCreateEnvironmentAsync([NotNull] IEnvironmentInfo environment);
+
+        Task<bool> TryDeleteEnvironmentAsync([NotNull] string environment);
+
+        Task<bool> TryUpdateEnvironmentPropertiesAsync([NotNull] string environment, [NotNull] Func<IEnvironmentInfoProperties, IEnvironmentInfoProperties> update);
+
+        Task<bool> TryUpdateEnvironmentParentAsync(string environment, string newParent);
+
         [NotNull]
         Task<IReadOnlyList<string>> GetAllApplicationsAsync(string environment);
 
         [CanBeNull]
-        Task<IEnvironmentInfo> GetEnvironmentAsync(string environment);
-
-        [CanBeNull]
         Task<IApplicationInfo> GetApplicationAsync(string environment, string application);
 
-        Task<bool> TryAddEnvironmentAsync(IEnvironmentInfo environment);
-
-        Task<bool> TryDeleteEnvironmentAsync(string environment);
-
-        Task<bool> TryUpdateEnvironmentPropertiesAsync(string environment, Func<IEnvironmentInfoProperties, IEnvironmentInfoProperties> updateFunc); 
-
         Task<bool> TryUpdateApplicationPropertiesAsync(string environment, string application, Func<IApplicationInfoProperties, IApplicationInfoProperties> updateFunc);
+
+        Task<bool> TryCreatePermanentReplicaAsync(IReplicaInfo replica);
+
+        // CR(kungurtsev): check that zookeeper node is persistent before delete.
+        Task<bool> TryDeletePermanentReplicaAsync(IReplicaInfo replica);
     }
 }
