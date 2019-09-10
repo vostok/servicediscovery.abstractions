@@ -12,6 +12,6 @@ namespace Vostok.ServiceDiscovery.Abstractions
         string Application { get; }
 
         [NotNull]
-        IReadOnlyDictionary<string, string> Properties { get; }
+        IApplicationInfoProperties Properties { get; }
     }
 }

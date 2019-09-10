@@ -24,8 +24,8 @@ namespace Vostok.ServiceDiscovery.Abstractions
 
         Task<bool> TryDeleteEnvironmentAsync(string environment);
 
-        Task<bool> TryUpdateEnvironmentPropertiesAsync(string environment, Func<IServiceTopologyProperties, IServiceTopologyProperties> updateFunc); 
+        Task<bool> TryUpdateEnvironmentPropertiesAsync(string environment, Func<IEnvironmentInfoProperties, IEnvironmentInfoProperties> updateFunc); 
 
-        Task<bool> TryUpdateApplicationPropertiesAsync(string environment, string application, Func<IServiceTopologyProperties, IServiceTopologyProperties> updateFunc);
+        Task<bool> TryUpdateApplicationPropertiesAsync(string environment, string application, Func<IApplicationInfoProperties, IApplicationInfoProperties> updateFunc);
     }
 }

@@ -12,6 +12,6 @@ namespace Vostok.ServiceDiscovery.Abstractions
         string ParentEnvironment { get; }
 
         [NotNull]
-        IReadOnlyDictionary<string, string> Properties { get; }
+        IEnvironmentInfoProperties Properties { get; }
     }
 }
