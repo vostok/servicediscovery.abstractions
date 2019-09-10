@@ -14,17 +14,18 @@ namespace Vostok.ServiceDiscovery.Abstractions
         [NotNull]
         Task<IReadOnlyList<string>> GetAllApplicationsAsync(string environment);
 
-        [NotNull]
-        Task<string> GetParentZoneAsync(string environment);
+        [CanBeNull]
+        Task<IEnvironmentInfo> GetEnvironmentAsync(string environment);
 
-        Task<bool> TryAddNode(string environment, string parent);
+        [CanBeNull]
+        Task<IApplicationInfo> GetApplicationAsync(string environment, string application);
 
-        Task<bool> TryDeleteNode(string environment);
+        Task<bool> TryAddEnvironmentAsync(IEnvironmentInfo environment);
 
-        Task<bool> AddToBlacklist(string environment, string topologyName, Uri replicaUri);
+        Task<bool> TryDeleteEnvironmentAsync(string environment);
 
-        Task<bool> RemoveFromBlacklist(string environment, string topologyName, Uri replicaUri);
+        Task<bool> TryUpdateEnvironmentPropertiesAsync(string environment, Func<IServiceTopologyProperties, IServiceTopologyProperties> updateFunc); 
 
-        Task<bool> SetExternalUrl(string environment, string application, Uri externalUrl);
+        Task<bool> TryUpdateApplicationPropertiesAsync(string environment, string application, Func<IServiceTopologyProperties, IServiceTopologyProperties> updateFunc);
     }
 }
