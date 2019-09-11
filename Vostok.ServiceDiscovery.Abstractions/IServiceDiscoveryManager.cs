@@ -11,7 +11,7 @@ namespace Vostok.ServiceDiscovery.Abstractions
         [NotNull]
         Task<IReadOnlyList<string>> GetAllEnvironmentsAsync();
 
-        [CanBeNull]
+        [ItemCanBeNull]
         Task<IEnvironmentInfo> GetEnvironmentAsync([NotNull] string environment);
 
         Task<bool> TryCreateEnvironmentAsync([NotNull] IEnvironmentInfo environment);
@@ -25,7 +25,7 @@ namespace Vostok.ServiceDiscovery.Abstractions
         [NotNull]
         Task<IReadOnlyList<string>> GetAllApplicationsAsync(string environment);
 
-        [CanBeNull]
+        [ItemCanBeNull]
         Task<IApplicationInfo> GetApplicationAsync(string environment, string application);
 
         Task<bool> TryUpdateApplicationPropertiesAsync(string environment, string application, Func<IApplicationInfoProperties, IApplicationInfoProperties> updateFunc);
