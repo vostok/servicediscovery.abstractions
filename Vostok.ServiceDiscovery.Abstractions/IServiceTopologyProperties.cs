@@ -15,6 +15,7 @@ namespace Vostok.ServiceDiscovery.Abstractions
         /// <para>Current instance is not modified.</para>
         /// <para>Existing property may get overwritten when using this method.</para>
         /// </summary>
+        [Pure]
         [NotNull]
         IServiceTopologyProperties Set([NotNull] string key, [NotNull] string value);
 
@@ -22,6 +23,7 @@ namespace Vostok.ServiceDiscovery.Abstractions
         /// <para>Returns a new instance of <see cref="IServiceTopologyProperties"/> without a property with given <paramref name="key"/>.</para>
         /// <para>Current instance is not modified.</para>
         /// </summary>
+        [Pure]
         [NotNull]
         IServiceTopologyProperties Remove([NotNull] string key);
     }

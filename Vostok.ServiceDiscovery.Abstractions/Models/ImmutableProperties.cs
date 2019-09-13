@@ -43,17 +43,17 @@ namespace Vostok.ServiceDiscovery.Abstractions.Models
         /// <inheritdoc />
         public bool TryGetValue(string key, out string value) => properties.TryGetValue(key, out value);
 
+        public ImmutableArrayDictionary<string, string> Set(string key, string value) =>
+            properties.Set(key, value);
+
+        public ImmutableArrayDictionary<string, string> Remove(string key) =>
+            properties.Remove(key);
+
         /// <inheritdoc />
         public string this[string key] => properties[key];
 
         /// <inheritdoc />
         IEnumerator IEnumerable.GetEnumerator() =>
             GetEnumerator();
-
-        public ImmutableArrayDictionary<string, string> Set(string key, string value) =>
-            properties.Set(key, value);
-
-        public ImmutableArrayDictionary<string, string> Remove(string key) =>
-            properties.Remove(key);
     }
 }
