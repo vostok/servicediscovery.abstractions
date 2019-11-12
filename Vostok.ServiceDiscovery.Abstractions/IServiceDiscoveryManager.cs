@@ -34,6 +34,10 @@ namespace Vostok.ServiceDiscovery.Abstractions
 
         Task<bool> TryUpdateEnvironmentParentAsync([NotNull] string environment, [NotNull] string newParent);
 
+        Task<bool> TryCreateApplicationAsync([NotNull] IApplicationInfo application);
+
+        Task<bool> TryDeleteApplicationAsync([NotNull] string environment, [NotNull] string application);
+
         Task<bool> TryUpdateApplicationPropertiesAsync([NotNull] string environment, [NotNull] string application, [NotNull] Func<IApplicationInfoProperties, IApplicationInfoProperties> updateFunc);
 
         Task<bool> TryCreatePermanentReplicaAsync([NotNull] IReplicaInfo replica);
