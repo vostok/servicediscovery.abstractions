@@ -2,6 +2,8 @@
 
 Added `TryGetUrl` extension for `IReplicaInfo`.
 
+Added `TryCreateApplicationAsync` and `TryDeleteApplicationAsync` methods.
+
 ## 0.1.3 (12-09-2019):
 
 Added public models for `IServiceDiscoveryManager`:
