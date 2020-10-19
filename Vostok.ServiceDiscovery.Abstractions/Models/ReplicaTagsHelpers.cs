@@ -8,11 +8,11 @@ namespace Vostok.ServiceDiscovery.Abstractions.Models
     public static class ReplicaTagsHelpers
     {
         [NotNull]
-        public static ITag[] Deserialize([NotNull] string value)
+        public static Tag[] Deserialize([NotNull] string value)
             => value.Split(TagsSeparator.ToCharArray(), StringSplitOptions.RemoveEmptyEntries)
                 .Select(t => t.Split(TagsKeyValueSeparator.ToCharArray(), StringSplitOptions.RemoveEmptyEntries))
                 .Where(t => t.Length == 2)
-                .Select(t => (ITag) new Tag(t[0], t[1]))
+                .Select(t => new Tag(t[0], t[1]))
                 .ToArray();
 
         [NotNull]
