@@ -39,8 +39,8 @@ namespace Vostok.ServiceDiscovery.Abstractions.Models
         public static string GetReplicaTagsPropertyKey([NotNull] string propertyKeySuffix) 
             => TagsParameterPrefix + propertyKeySuffix;
         
-        public const string TagsParameterPrefix = "Tags:";
-        public const string TagsSeparator = "|";
-        public const string TagsKeyValueSeparator = "=";
+        private const string TagsParameterPrefix = "Tags:";
+        private const string TagsSeparator = "|";
+        private const string TagsKeyValueSeparator = "=";
     }
 }
