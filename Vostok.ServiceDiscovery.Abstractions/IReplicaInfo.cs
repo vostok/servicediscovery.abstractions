@@ -32,5 +32,11 @@ namespace Vostok.ServiceDiscovery.Abstractions
         /// </summary>
         [NotNull]
         IReadOnlyDictionary<string, string> Properties { get; }
+        
+        /// <summary>
+        /// Application tags.
+        /// </summary>
+        [NotNull]
+        ITag[] Tags { get; }
     }
 }

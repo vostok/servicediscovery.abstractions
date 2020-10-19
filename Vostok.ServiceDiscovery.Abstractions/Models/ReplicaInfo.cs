@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using JetBrains.Annotations;
 
 namespace Vostok.ServiceDiscovery.Abstractions.Models
@@ -8,7 +9,7 @@ namespace Vostok.ServiceDiscovery.Abstractions.Models
     {
         private readonly Dictionary<string, string> properties;
 
-        public ReplicaInfo([NotNull] string environment, [NotNull] string application, [NotNull] string replica, [CanBeNull] Dictionary<string, string> properties = null)
+        public ReplicaInfo([NotNull] string environment, [NotNull] string application, [NotNull] string replica, [CanBeNull] Dictionary<string, string> properties = null, [CanBeNull] ITag[] tags = null)
         {
             if (string.IsNullOrWhiteSpace(environment))
                 throw new ArgumentOutOfRangeException(nameof(environment), environment);
@@ -18,6 +19,7 @@ namespace Vostok.ServiceDiscovery.Abstractions.Models
                 throw new ArgumentOutOfRangeException(nameof(replica), replica);
 
             this.properties = properties ?? new Dictionary<string, string>();
+            Tags = ReplicaTagsHelpers.Distinct(tags ?? Array.Empty<ITag>()).ToArray();
             Environment = environment;
             Application = application;
             Replica = replica;
@@ -28,6 +30,8 @@ namespace Vostok.ServiceDiscovery.Abstractions.Models
         public string Application { get; }
 
         public string Replica { get; }
+
+        public ITag[] Tags { get; }
 
         public IReadOnlyDictionary<string, string> Properties => properties;
 
