@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using JetBrains.Annotations;
-using Vostok.ServiceDiscovery.Abstractions.Models;
 
 namespace Vostok.ServiceDiscovery.Abstractions
 {
@@ -33,11 +32,5 @@ namespace Vostok.ServiceDiscovery.Abstractions
         /// </summary>
         [NotNull]
         IReadOnlyDictionary<string, string> Properties { get; }
-        
-        /// <summary>
-        /// Application tags.
-        /// </summary>
-        [NotNull]
-        TagCollection Tags { get; }
     }
 }
