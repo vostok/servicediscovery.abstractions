@@ -16,7 +16,7 @@ namespace Vostok.ServiceDiscovery.Abstractions.Models
                 .ToArray();
 
         [NotNull]
-        public static string Serialize([NotNull] ITag[] tags)
+        public static string Serialize([NotNull] Tag[] tags)
         {
             var strings = string.Join(
                 TagsKeyValueSeparator,
@@ -25,7 +25,7 @@ namespace Vostok.ServiceDiscovery.Abstractions.Models
         }
         
         [NotNull]
-        public static IEnumerable<ITag> Distinct([NotNull] IEnumerable<ITag> tags) 
+        public static IEnumerable<Tag> Distinct([NotNull] IEnumerable<Tag> tags) 
         {
             var hashSet = new HashSet<string>();
             foreach (var tag in tags)

@@ -38,6 +38,6 @@ namespace Vostok.ServiceDiscovery.Abstractions
         /// Application tags.
         /// </summary>
         [NotNull]
-        ITag[] Tags { get; }
+        Tag[] Tags { get; }
     }
 }
