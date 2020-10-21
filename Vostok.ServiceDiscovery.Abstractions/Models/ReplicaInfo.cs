@@ -5,6 +5,7 @@ using JetBrains.Annotations;
 
 namespace Vostok.ServiceDiscovery.Abstractions.Models
 {
+    [PublicAPI]
     public class ReplicaInfo : IReplicaInfo
     {
         private readonly Dictionary<string, string> properties;
