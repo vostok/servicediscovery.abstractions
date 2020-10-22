@@ -32,8 +32,8 @@ namespace Vostok.ServiceDiscovery.Abstractions.Models
                 var dict = input.Split(TagsSeparator.ToCharArray(), StringSplitOptions.RemoveEmptyEntries)
                     .Select(t => t.Split(TagsKeyValueSeparator.ToCharArray(), StringSplitOptions.RemoveEmptyEntries))
                     .Where(t => t.Length == 2)
-                    .GroupBy(t => t[0], t => t[1], StringComparer.InvariantCultureIgnoreCase)
-                    .ToDictionary(x => x.Key, x => x.First(), StringComparer.InvariantCultureIgnoreCase);
+                    .GroupBy(t => t[0], t => t[1], StringComparer.OrdinalIgnoreCase)
+                    .ToDictionary(x => x.Key, x => x.First(), StringComparer.OrdinalIgnoreCase);
                 tagCollection = new TagCollection(dict);
                 return true;
             }
