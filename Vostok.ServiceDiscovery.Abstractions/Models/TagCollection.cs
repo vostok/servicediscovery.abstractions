@@ -38,14 +38,20 @@ namespace Vostok.ServiceDiscovery.Abstractions.Models
                     if (nextTagSeparator == -1)
                     {
                         if (nextKeyValueSeparator != -1)
-                            tagCollection[input.Substring(iterator, nextKeyValueSeparator - iterator)] 
-                                = input.Substring(nextKeyValueSeparator + 1, input.Length - nextKeyValueSeparator - 1);
+                        {
+                            var key = input.Substring(iterator, nextKeyValueSeparator - iterator);
+                            var value = input.Substring(nextKeyValueSeparator + 1, input.Length - nextKeyValueSeparator - 1);
+                            tagCollection[key] = value;
+                        }
                         break;
                     }
 
                     if (nextKeyValueSeparator != -1 && nextKeyValueSeparator < nextTagSeparator)
-                        tagCollection[input.Substring(iterator, nextKeyValueSeparator - iterator)] 
-                            = input.Substring(nextKeyValueSeparator + 1, nextTagSeparator - nextKeyValueSeparator - 1);
+                    {
+                        var key = input.Substring(iterator, nextKeyValueSeparator - iterator);
+                        var value = input.Substring(nextKeyValueSeparator + 1, nextTagSeparator - nextKeyValueSeparator - 1);
+                        tagCollection[key] = value;
+                    }
                     iterator = nextTagSeparator + 1;
                 }
                 
