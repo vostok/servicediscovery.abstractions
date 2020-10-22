@@ -20,7 +20,7 @@ namespace Vostok.ServiceDiscovery.Abstractions.Tests
             new TagCollection().ToString().Should().Be("");
         }
 
-        [Test]
+        [Test] // todo should think about edge cases
         public void TryParse_should_return_empty_tag_collection_on_bad_string()
         {
             const string initial = "tag1|=tag2|tag3=";
@@ -68,7 +68,7 @@ namespace Vostok.ServiceDiscovery.Abstractions.Tests
             var expected = new TagCollection
             {
                 {"tag1", "value1"},
-                {"tag", "value=tag"},
+                {"tag", "value=tag"}, // todo should think about "=" sign escaping
                 {"tag2", "123"},
                 "tag3",
             };

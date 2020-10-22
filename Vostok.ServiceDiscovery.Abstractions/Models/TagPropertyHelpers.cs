@@ -15,6 +15,8 @@ namespace Vostok.ServiceDiscovery.Abstractions.Models
         [CanBeNull]
         public static string ExtractReplicaName([NotNull] string appPropertyName)
         {
+            if (!IsTagsPropertyKey(appPropertyName))
+                return null;
             var tagsParameterPrefixLength = TagsParameterPrefix.Length;
             var tagsParameterValuesSeparatorIndex = appPropertyName.IndexOf(TagsParameterValuesSeparator, TagsParameterPrefix.Length, StringComparison.InvariantCulture);
             return tagsParameterValuesSeparatorIndex < 0 
