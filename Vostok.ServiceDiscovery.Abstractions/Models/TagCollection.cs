@@ -12,6 +12,8 @@ namespace Vostok.ServiceDiscovery.Abstractions.Models
         private const string DefaultValue = "true";
         private const string TagsSeparator = "|";
         private const string TagsKeyValueSeparator = "=";
+        
+        private static readonly DictionaryComparer<string, string> DictionaryComparer = new DictionaryComparer<string, string>(StringComparer.OrdinalIgnoreCase);
 
         public TagCollection()
             : base(StringComparer.OrdinalIgnoreCase)
@@ -22,19 +24,31 @@ namespace Vostok.ServiceDiscovery.Abstractions.Models
             : base(tagsCollection, StringComparer.OrdinalIgnoreCase)
         {
         }
-
+        
         public static bool TryParse(string input, out TagCollection tagCollection)
         {
             try
             {
-                // CR(iloktionov): Less garbage please :)
+                var iterator = 0;
+                tagCollection = new TagCollection();
+                while (iterator < input.Length)
+                {
+                    var nextTagSeparator = input.IndexOf(TagsSeparator, iterator, StringComparison.Ordinal);
+                    var nextKeyValueSeparator = input.IndexOf(TagsKeyValueSeparator, iterator, StringComparison.Ordinal);
+                    if (nextTagSeparator == -1)
+                    {
+                        if (nextKeyValueSeparator != -1)
+                            tagCollection[input.Substring(iterator, nextKeyValueSeparator - iterator)] 
+                                = input.Substring(nextKeyValueSeparator + 1, input.Length - nextKeyValueSeparator - 1);
+                        break;
+                    }
 
-                var dict = input.Split(TagsSeparator.ToCharArray(), StringSplitOptions.RemoveEmptyEntries)
-                    .Select(t => t.Split(TagsKeyValueSeparator.ToCharArray(), StringSplitOptions.RemoveEmptyEntries))
-                    .Where(t => t.Length == 2)
-                    .GroupBy(t => t[0], t => t[1], StringComparer.OrdinalIgnoreCase)
-                    .ToDictionary(x => x.Key, x => x.First(), StringComparer.OrdinalIgnoreCase);
-                tagCollection = new TagCollection(dict);
+                    if (nextKeyValueSeparator != -1 && nextKeyValueSeparator < nextTagSeparator)
+                        tagCollection[input.Substring(iterator, nextKeyValueSeparator - iterator)] 
+                            = input.Substring(nextKeyValueSeparator + 1, nextTagSeparator - nextKeyValueSeparator - 1);
+                    iterator = nextTagSeparator + 1;
+                }
+                
                 return true;
             }
             catch
@@ -58,7 +72,7 @@ namespace Vostok.ServiceDiscovery.Abstractions.Models
         #region Equality members
 
         public bool Equals(TagCollection other)
-            => DictionaryComparer<string, string>.Instance.Equals(this, other);
+            => DictionaryComparer.Equals(this, other);
 
         public override bool Equals(object obj)
         {
@@ -73,7 +87,7 @@ namespace Vostok.ServiceDiscovery.Abstractions.Models
         }
 
         public override int GetHashCode()
-            => DictionaryComparer<string, string>.Instance.GetHashCode(this);
+            => DictionaryComparer.GetHashCode(this);
 
         #endregion
     }
