@@ -14,8 +14,28 @@ namespace Vostok.ServiceDiscovery.Abstractions.Tests
         [TestCase("Tags=replicaName1:persistent", false)]
         [TestCase("TagsReplicaName1:persistent", false)]
         [TestCase("Tags:", true)]
+        [TestCase("", false)]
+        [TestCase(null, false)]
         public void IsTagsPropertyKey_should_return_expected_result_on_given_key(string key, bool expected)
             => TagPropertyHelpers.IsTagsPropertyKey(key).Should().Be(expected);
+        
+        [Test]
+        [TestCase("Tags:replicaName1", "replicaName1", true)]
+        [TestCase("Tags:replicaName1:persistent", "replicaName1", true)]
+        [TestCase("Tags-replicaName1", "replicaName1", false)]
+        [TestCase("Tags=replicaName1:persistent", "replicaName1", false)]
+        [TestCase("TagsReplicaName1:persistent", "replicaName1", false)]
+        [TestCase("Tags:", "replicaName1", false)]
+        [TestCase("Tags:replicaName1", "replicaName1", true)]
+        [TestCase("Tags:replicaName1:persistent", "replicaName2", false)]
+        [TestCase(null, "replicaName2", false)]
+        [TestCase("Tags:", "", true)]
+        [TestCase("Tags:", null, true)]
+        [TestCase("Tags::persistent", "", true)]
+        [TestCase("Tags:replicaName1", "", false)]
+        [TestCase("Tags:replicaName1:persistent", "", false)]
+        public void IsReplicaTagsPropertyKey_should_return_expected_result_on_given_key(string key, string replicaName, bool expected)
+            => TagPropertyHelpers.IsReplicaTagsPropertyKey(key, replicaName).Should().Be(expected);
 
         [Test]
         [TestCase("Tags:replicaName1", "replicaName1")]
@@ -33,7 +53,7 @@ namespace Vostok.ServiceDiscovery.Abstractions.Tests
         [TestCase("replicaName", "kind", "Tags:replicaName:kind")]
         [TestCase("", "kind", "Tags::kind")]
         [TestCase("replicaName", "", "Tags:replicaName:")]
-        [TestCase("replica", "kind:hmmm", "replica:kind:hmmm:")] // todo should think about ":" sign escaping
+        [TestCase("replica", "kind:hmmm", "Tags:replica:kind:hmmm")] // todo should think about ":" sign escaping
         public void FormatName_should_return_expected_result_on_given_replica_and_kind(string replicaName, string tagKind, string expected)
             => TagPropertyHelpers.FormatName(replicaName, tagKind).Should().Be(expected);
     }
