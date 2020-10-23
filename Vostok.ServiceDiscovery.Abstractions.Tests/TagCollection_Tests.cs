@@ -68,7 +68,7 @@ namespace Vostok.ServiceDiscovery.Abstractions.Tests
             var expected = new TagCollection
             {
                 {"tag1", "value1"},
-                {"tag", "value=tag"}, // todo should think about "=" sign escaping
+                {"tag", "value=tag"},
                 {"tag2", "123"},
                 "tag3",
             };
@@ -84,18 +84,18 @@ namespace Vostok.ServiceDiscovery.Abstractions.Tests
         }
 
         [Test]
-        public void Equals_should_return_true_on_tag_collections_with_same_key_values_with_other_case()
+        public void Equals_should_return_false_on_tag_collections_with_same_key_values_with_other_case()
         {
             var collection1 = new TagCollection { "tag1", {"tag2", "value1"}, "tag3" };
             var collection2 = new TagCollection {"TAG1", {"tag2", "VALUE1"}, "tag3" };
-            collection1.Equals(collection2).Should().BeTrue();
+            collection1.Equals(collection2).Should().BeFalse();
         }
 
         [Test]
         public void Equals_should_return_false_with_other_members_count()
         {
             var collection1 = new TagCollection { "tag1", {"tag2", "value1"}, "tag3", "tag4" };
-            var collection2 = new TagCollection {"TAG1", {"tag2", "VALUE1"}, "tag3" };
+            var collection2 = new TagCollection {"TAG1", {"tag2", "value1"}, "tag3" };
             collection1.Equals(collection2).Should().BeFalse();
         }
     }

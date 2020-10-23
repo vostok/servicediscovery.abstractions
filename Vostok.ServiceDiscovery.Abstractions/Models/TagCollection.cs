@@ -12,8 +12,6 @@ namespace Vostok.ServiceDiscovery.Abstractions.Models
         private const string DefaultValue = "true";
         private const string TagsSeparator = "|";
         private const string TagsKeyValueSeparator = "=";
-        
-        private static readonly DictionaryComparer<string, string> DictionaryComparer = new DictionaryComparer<string, string>(StringComparer.OrdinalIgnoreCase);
 
         public TagCollection()
             : base(StringComparer.OrdinalIgnoreCase)
@@ -78,7 +76,7 @@ namespace Vostok.ServiceDiscovery.Abstractions.Models
         #region Equality members
 
         public bool Equals(TagCollection other)
-            => DictionaryComparer.Equals(this, other);
+            => DictionaryComparer<string, string>.Instance.Equals(this, other);
 
         public override bool Equals(object obj)
         {
@@ -93,7 +91,7 @@ namespace Vostok.ServiceDiscovery.Abstractions.Models
         }
 
         public override int GetHashCode()
-            => DictionaryComparer.GetHashCode(this);
+            => DictionaryComparer<string, string>.Instance.GetHashCode(this);
 
         #endregion
     }
