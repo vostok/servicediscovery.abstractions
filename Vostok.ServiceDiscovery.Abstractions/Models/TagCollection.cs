@@ -22,44 +22,43 @@ namespace Vostok.ServiceDiscovery.Abstractions.Models
             : base(tagsCollection, StringComparer.OrdinalIgnoreCase)
         {
         }
-        
-        public static bool TryParse(string input, out TagCollection tagCollection)
-        {
-            try
-            {
-                var iterator = 0;
-                tagCollection = new TagCollection();
-                while (iterator < input.Length)
-                {
-                    var nextTagSeparator = input.IndexOf(TagsSeparator, iterator, StringComparison.Ordinal);
-                    var nextKeyValueSeparator = input.IndexOf(TagsKeyValueSeparator, iterator, StringComparison.Ordinal);
-                    if (nextTagSeparator == -1)
-                    {
-                        if (nextKeyValueSeparator != -1)
-                        {
-                            var key = input.Substring(iterator, nextKeyValueSeparator - iterator);
-                            var value = input.Substring(nextKeyValueSeparator + 1, input.Length - nextKeyValueSeparator - 1);
-                            tagCollection[key] = value;
-                        }
-                        break;
-                    }
 
-                    if (nextKeyValueSeparator != -1 && nextKeyValueSeparator < nextTagSeparator)
-                    {
-                        var key = input.Substring(iterator, nextKeyValueSeparator - iterator);
-                        var value = input.Substring(nextKeyValueSeparator + 1, nextTagSeparator - nextKeyValueSeparator - 1);
-                        tagCollection[key] = value;
-                    }
-                    iterator = nextTagSeparator + 1;
-                }
-                
+        public static bool TryParse([CanBeNull] string input, out TagCollection tagCollection)
+        {
+            if (string.IsNullOrEmpty(input))
+            {
+                tagCollection = new TagCollection();
                 return true;
             }
-            catch
+
+            var iterator = 0;
+            var collection = new TagCollection();
+            tagCollection = null;
+            while (iterator <= input.Length)
             {
-                tagCollection = null;
-                return false;
+                var nextTagSeparator = input.IndexOf(TagsSeparator, iterator, StringComparison.Ordinal);
+                var nextKeyValueSeparator = input.IndexOf(TagsKeyValueSeparator, iterator, StringComparison.Ordinal);
+                if (nextKeyValueSeparator == -1)
+                    return false;
+
+                var key = input.Substring(iterator, nextKeyValueSeparator - iterator);
+                if (collection.ContainsKey(key))
+                    return false;
+
+                if (nextTagSeparator == -1)
+                {
+                    collection[key] = input.Substring(nextKeyValueSeparator + 1, input.Length - nextKeyValueSeparator - 1);
+                    break;
+                }
+
+                if (nextKeyValueSeparator >= nextTagSeparator)
+                    return false;
+                collection[key] = input.Substring(nextKeyValueSeparator + 1, nextTagSeparator - nextKeyValueSeparator - 1);
+                iterator = nextTagSeparator + 1;
             }
+
+            tagCollection = collection;
+            return true;
         }
 
         public void Add([NotNull] string key)
@@ -72,7 +71,7 @@ namespace Vostok.ServiceDiscovery.Abstractions.Models
 
         public override string ToString()
             => string.Join(TagsSeparator, this.Select(x => x.Key + TagsKeyValueSeparator + x.Value));
-        
+
         #region Equality members
 
         public bool Equals(TagCollection other)
@@ -80,11 +79,11 @@ namespace Vostok.ServiceDiscovery.Abstractions.Models
 
         public override bool Equals(object obj)
         {
-            if (ReferenceEquals(null, obj)) 
+            if (ReferenceEquals(null, obj))
                 return false;
-            if (ReferenceEquals(this, obj)) 
+            if (ReferenceEquals(this, obj))
                 return true;
-            if (obj.GetType() != GetType()) 
+            if (obj.GetType() != GetType())
                 return false;
 
             return Equals((TagCollection)obj);
