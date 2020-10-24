@@ -6,8 +6,8 @@ namespace Vostok.ServiceDiscovery.Abstractions.Models
     [PublicAPI]
     public static class TagPropertyHelpers
     {
-        private const string TagsParameterPrefix = "Tags:";
-        private const string TagsParameterValuesSeparator = ":";
+        private const string TagsParameterPrefix = "Tags|";
+        private const string TagsParameterValuesSeparator = "|";
 
         public static bool IsTagsPropertyKey([NotNull] string key)
             => !string.IsNullOrEmpty(key) && key.StartsWith(TagsParameterPrefix);
