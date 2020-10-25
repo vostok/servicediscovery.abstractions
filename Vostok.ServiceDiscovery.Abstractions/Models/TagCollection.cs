@@ -11,7 +11,7 @@ namespace Vostok.ServiceDiscovery.Abstractions.Models
     {
         private const string DefaultValue = "true";
         private const string TagsSeparator = "|";
-        private const string TagsKeyValueSeparator = "=";
+        private const string TagsKeyValueSeparator = "═"; // U+2550
 
         public TagCollection()
             : base(StringComparer.OrdinalIgnoreCase)
