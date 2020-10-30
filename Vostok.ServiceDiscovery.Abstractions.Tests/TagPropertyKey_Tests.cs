@@ -11,6 +11,7 @@ namespace Vostok.ServiceDiscovery.Abstractions.Tests
         [TestCase("Tags|replicaName1|", "replicaName1", "")]
         [TestCase("Tags|replicaName1|persistent", "replicaName1", "persistent")]
         [TestCase("Tags||kind", "", "kind")]
+        [TestCase("Tags||", "", "")]
         [TestCase("Tags|http://replicaName:4242/|", "http://replicaName:4242/", "")]
         [TestCase("Tags|http://replicaName:4242/|persistent", "http://replicaName:4242/", "persistent")]
         public void ExtractReplicaName_should_return_true_on_valid_property_name(string appPropertyName, string expectedReplicaName, string expectedTagKind)
@@ -27,6 +28,7 @@ namespace Vostok.ServiceDiscovery.Abstractions.Tests
         [TestCase("Tags=replicaName1|persistent")]
         [TestCase("TagsReplicaName1|persistent")]
         [TestCase("Tags|")]
+        [TestCase("Tags")]
         public void ExtractReplicaName_should_return_false_on_invalid_property_name(string appPropertyName)
         {
             TagPropertyKey.TryParse(appPropertyName, out var actual).Should().BeFalse();
