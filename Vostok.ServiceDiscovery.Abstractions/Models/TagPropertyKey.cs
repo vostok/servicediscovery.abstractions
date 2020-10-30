@@ -27,7 +27,7 @@ namespace Vostok.ServiceDiscovery.Abstractions.Models
         [NotNull]
         public string TagKind { get; }
 
-        public static bool TryParse([NotNull] string input, out TagPropertyKey tagPropertyKey)
+        public static bool TryParse1([NotNull] string input, out TagPropertyKey tagPropertyKey)
         {
             tagPropertyKey = null;
             var split = input.Split(TagsParameterValuesSeparator.ToCharArray());
@@ -37,11 +37,29 @@ namespace Vostok.ServiceDiscovery.Abstractions.Models
             tagPropertyKey = new TagPropertyKey(split[1], split[2]);
             return true;
         }
+        
+        public static bool TryParse([NotNull] string input, out TagPropertyKey tagPropertyKey)
+        {
+            tagPropertyKey = null;
+            if (string.IsNullOrEmpty(input) || !input.StartsWith(TagsParameterPrefix))
+                return false;
+            
+            var tagsParameterValuesSeparatorIndex = input.IndexOf(TagsParameterValuesSeparator, TagsParameterPrefix.Length, StringComparison.InvariantCulture);
+            if (tagsParameterValuesSeparatorIndex < 0)
+                return false;
+
+            tagPropertyKey = new TagPropertyKey(
+                input.Substring(TagsParameterPrefix.Length, tagsParameterValuesSeparatorIndex - TagsParameterPrefix.Length),
+                input.Substring(tagsParameterValuesSeparatorIndex + 1, input.Length - tagsParameterValuesSeparatorIndex - 1)
+                );
+            
+            return true;
+        }
 
         public override string ToString()
-            => TagsParameterPrefix + TagsParameterValuesSeparator + ReplicaName + TagsParameterValuesSeparator + TagKind;
+            => TagsParameterPrefix + ReplicaName + TagsParameterValuesSeparator + TagKind;
         
-        private const string TagsParameterPrefix = "Tags";
+        private const string TagsParameterPrefix = "Tags|";
         private const string TagsParameterValuesSeparator = "|";
     }
 }
