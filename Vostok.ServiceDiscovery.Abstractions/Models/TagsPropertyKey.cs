@@ -7,20 +7,20 @@ namespace Vostok.ServiceDiscovery.Abstractions.Models
     /// 
     /// </summary>
     [PublicAPI]
-    public class TagPropertyKey
+    public class TagsPropertyKey
     {
         private const string TagsParameterPrefix = "Tags|";
         private const string TagsParameterValuesSeparator = "|";
 
-        public TagPropertyKey([NotNull] string replicaName, [NotNull] string tagKind)
+        public TagsPropertyKey([NotNull] string replicaName, [NotNull] string tagKind)
         {
             ReplicaName = replicaName ?? throw new ArgumentNullException(nameof(replicaName));
             TagKind = tagKind ?? throw new ArgumentNullException(nameof(tagKind));
         }
 
-        public static bool TryParse([NotNull] string input, out TagPropertyKey tagPropertyKey)
+        public static bool TryParse([NotNull] string input, out TagsPropertyKey tagsPropertyKey)
         {
-            tagPropertyKey = null;
+            tagsPropertyKey = null;
             if (string.IsNullOrEmpty(input) || !input.StartsWith(TagsParameterPrefix))
                 return false;
 
@@ -28,7 +28,7 @@ namespace Vostok.ServiceDiscovery.Abstractions.Models
             if (tagsParameterValuesSeparatorIndex < 0)
                 return false;
 
-            tagPropertyKey = new TagPropertyKey(
+            tagsPropertyKey = new TagsPropertyKey(
                 input.Substring(TagsParameterPrefix.Length, tagsParameterValuesSeparatorIndex - TagsParameterPrefix.Length),
                 input.Substring(tagsParameterValuesSeparatorIndex + 1, input.Length - tagsParameterValuesSeparatorIndex - 1)
             );
