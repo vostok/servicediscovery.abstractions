@@ -16,7 +16,7 @@ namespace Vostok.ServiceDiscovery.Abstractions.Tests
         [TestCase("Tags|http://replicaName:4242/|persistent", "http://replicaName:4242/", "persistent")]
         public void ExtractReplicaName_should_return_true_on_valid_property_name(string appPropertyName, string expectedReplicaName, string expectedTagKind)
         {
-            TagPropertyKey.TryParse(appPropertyName, out var actual).Should().BeTrue();
+            TagsPropertyKey.TryParse(appPropertyName, out var actual).Should().BeTrue();
             actual.Should().NotBeNull();
             actual.ReplicaName.Should().Be(expectedReplicaName);
             actual.TagKind.Should().Be(expectedTagKind);
@@ -31,7 +31,7 @@ namespace Vostok.ServiceDiscovery.Abstractions.Tests
         [TestCase("Tags")]
         public void ExtractReplicaName_should_return_false_on_invalid_property_name(string appPropertyName)
         {
-            TagPropertyKey.TryParse(appPropertyName, out var actual).Should().BeFalse();
+            TagsPropertyKey.TryParse(appPropertyName, out var actual).Should().BeFalse();
             actual.Should().BeNull();
         }
 
@@ -41,6 +41,6 @@ namespace Vostok.ServiceDiscovery.Abstractions.Tests
         [TestCase("replicaName", "", "Tags|replicaName|")]
         [TestCase("replica:1234", "kind:hmmm", "Tags|replica:1234|kind:hmmm")]
         public void FormatName_should_return_expected_result_on_given_replica_and_kind(string replicaName, string tagKind, string expected)
-            => new TagPropertyKey(replicaName, tagKind).ToString().Should().Be(expected);
+            => new TagsPropertyKey(replicaName, tagKind).ToString().Should().Be(expected);
     }
 }
