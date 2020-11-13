@@ -30,8 +30,6 @@ namespace Vostok.ServiceDiscovery.Abstractions.Models
 
         public string Replica { get; }
 
-        public TagCollection Tags { get; set; }
-
         public IReadOnlyDictionary<string, string> Properties => properties;
 
         public void SetProperty([NotNull] string key, [CanBeNull] string value)
