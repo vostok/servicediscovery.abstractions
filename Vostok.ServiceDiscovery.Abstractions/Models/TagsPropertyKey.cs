@@ -4,7 +4,7 @@ using JetBrains.Annotations;
 namespace Vostok.ServiceDiscovery.Abstractions.Models
 {
     /// <summary>
-    /// 
+    /// <para>Represents replica tags property key that can be used for building tag storing key in application or replica parameters</para>
     /// </summary>
     [PublicAPI]
     public class TagsPropertyKey
@@ -36,15 +36,9 @@ namespace Vostok.ServiceDiscovery.Abstractions.Models
             return true;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
         [NotNull]
         public string ReplicaName { get; }
 
-        /// <summary>
-        /// 
-        /// </summary>
         [NotNull]
         public string TagKind { get; }
 
