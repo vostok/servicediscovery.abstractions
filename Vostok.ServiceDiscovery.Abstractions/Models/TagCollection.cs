@@ -6,6 +6,9 @@ using JetBrains.Annotations;
 
 namespace Vostok.ServiceDiscovery.Abstractions.Models
 {
+    /// <summary>
+    /// <para>Represents an key-value collection of tags that can be used to add additional information to replicas or applications.</para>
+    /// </summary>
     [PublicAPI]
     public class TagCollection : IDictionary<string, string>
     {
