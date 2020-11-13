@@ -1,3 +1,4 @@
+using System;
 using FluentAssertions;
 using NUnit.Framework;
 using Vostok.ServiceDiscovery.Abstractions.Models;
@@ -94,6 +95,42 @@ namespace Vostok.ServiceDiscovery.Abstractions.Tests
             var collection1 = new TagCollection {"tag1", {"tag2", "value1"}, "tag3", "tag4"};
             var collection2 = new TagCollection {"TAG1", {"tag2", "value1"}, "tag3"};
             collection1.Equals(collection2).Should().BeFalse();
+        }
+
+        [Test]
+        [TestCase("tag", "value", "tag", "value")]
+        [TestCase("  tag   ", " value ", "tag", "value")]
+        [TestCase("  tag  _ ", " value ", "tag  _", "value")]
+        [TestCase(" _ tag  _ ", "  ", "_ tag  _", "")]
+        public void Add_should_add_normalized_value(string key, string value, string expectedKey, string expectedValue)
+        {
+            var dict = new TagCollection{{key, value}};
+            dict[expectedKey].Should().Be(expectedValue);
+        }
+
+        [Test]
+        [TestCase("tag", "value", "tag", "value")]
+        [TestCase("  tag   ", " value ", "tag", "value")]
+        [TestCase("  tag  _ ", " value ", "tag  _", "value")]
+        [TestCase(" _ tag  _ ", "  ", "_ tag  _", "")]
+        public void PropertySet_should_add_normalized_value(string key, string value, string expectedKey, string expectedValue)
+        {
+            var collection = new TagCollection();
+            collection[key] = value;
+            collection[expectedKey].Should().Be(expectedValue);
+        }
+
+        [Test]
+        [TestCase("")]
+        [TestCase("  ")]
+        [TestCase(null)]
+        public void Add_should_throws_on_not_valid_arguments(string key)
+        {
+            var collection = new TagCollection();
+            collection
+                .Invoking(x => x.Add(key))
+                .Should()
+                .Throw<ArgumentException>();
         }
     }
 }
