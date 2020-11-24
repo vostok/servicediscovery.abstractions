@@ -47,7 +47,7 @@ namespace Vostok.ServiceDiscovery.Abstractions.Models
                     return false;
 
                 var key = input.Substring(iterator, nextKeyValueSeparator - iterator);
-                if (collection.ContainsKey(key))
+                if (key == "" || collection.ContainsKey(key))
                     return false;
 
                 if (nextTagSeparator == -1)
@@ -106,9 +106,19 @@ namespace Vostok.ServiceDiscovery.Abstractions.Models
                 dict[k] = v;
             }
         }
-        
+
+        private (string, string) NormalizeKeyValue(string key, string value)
+        {
+            key = key?.Trim() ?? throw new ArgumentNullException();
+            value = value?.Trim();
+
+            if (key == "")
+                throw new ArgumentOutOfRangeException(key);
+            return (key, value);
+        }
+
         #region Explicit methods
-        
+
         bool ICollection<KeyValuePair<string, string>>.IsReadOnly => ((ICollection<KeyValuePair<string, string>>)dict).IsReadOnly;
 
         void ICollection<KeyValuePair<string, string>>.Add(KeyValuePair<string, string> item)
@@ -125,23 +135,16 @@ namespace Vostok.ServiceDiscovery.Abstractions.Models
 
         IEnumerator IEnumerable.GetEnumerator()
             => GetEnumerator();
-        
+
         #endregion
-
-        private (string, string) NormalizeKeyValue(string key, string value)
-        {
-            key = key?.Trim() ?? throw new ArgumentNullException();
-            value = value?.Trim();
-
-            if (key == "")
-                throw new ArgumentOutOfRangeException(key);
-            return (key, value);
-        }
 
         #region Equality members
 
         public bool Equals(TagCollection other)
         {
+            if (Count != other.Count)
+                return false;
+
             foreach (var pair in dict)
             {
                 if (!other.TryGetValue(pair.Key, out var yValue) || pair.Value != yValue)
