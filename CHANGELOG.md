@@ -1,3 +1,7 @@
+## 0.1.5 (24-06-2021):
+
+Added base abstractions for tags storing.
+
 ## 0.1.4 (16-01-2020):
 
 Added `TryGetUrl` extension for `IReplicaInfo`.
