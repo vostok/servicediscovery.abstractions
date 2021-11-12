@@ -1,6 +1,6 @@
 # Vostok.ServiceDiscovery.Abstractions
 
-[![Build status](https://ci.appveyor.com/api/projects/status/github/vostok/servicediscovery-abstractions?svg=true&branch=master)](https://ci.appveyor.com/project/vostok/servicediscovery-abstractions/branch/master)
+[![Build & Test & Publish](https://github.com/vostok/servicediscovery.abstractions/actions/workflows/ci.yml/badge.svg)](https://github.com/vostok/servicediscovery.abstractions/actions/workflows/ci.yml)
 [![NuGet](https://img.shields.io/nuget/v/Vostok.ServiceDiscovery.Abstractions.svg)](https://www.nuget.org/packages/Vostok.ServiceDiscovery.Abstractions)
 
 Primary interfaces for service discovery subsystem (both server-side and client-side).
