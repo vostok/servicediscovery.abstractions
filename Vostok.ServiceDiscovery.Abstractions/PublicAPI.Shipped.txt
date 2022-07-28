@@ -1,0 +1,99 @@
+override Vostok.ServiceDiscovery.Abstractions.Models.TagCollection.Equals(object obj) -> bool
+override Vostok.ServiceDiscovery.Abstractions.Models.TagCollection.GetHashCode() -> int
+override Vostok.ServiceDiscovery.Abstractions.Models.TagCollection.ToString() -> string
+override Vostok.ServiceDiscovery.Abstractions.Models.TagsPropertyKey.ToString() -> string
+static Vostok.ServiceDiscovery.Abstractions.IReplicaInfoExtensions.TryGetUrl(this Vostok.ServiceDiscovery.Abstractions.IReplicaInfo replicaInfo, out System.Uri result) -> bool
+static Vostok.ServiceDiscovery.Abstractions.Models.ServiceTopology.Build(System.Collections.Generic.IReadOnlyList<System.Uri> replicas, System.Collections.Generic.IReadOnlyDictionary<string, string> properties) -> Vostok.ServiceDiscovery.Abstractions.Models.ServiceTopology
+static Vostok.ServiceDiscovery.Abstractions.Models.TagCollection.TryParse(string input, out Vostok.ServiceDiscovery.Abstractions.Models.TagCollection tagCollection) -> bool
+static Vostok.ServiceDiscovery.Abstractions.Models.TagsPropertyKey.TryParse(string input, out Vostok.ServiceDiscovery.Abstractions.Models.TagsPropertyKey tagsPropertyKey) -> bool
+Vostok.ServiceDiscovery.Abstractions.IApplicationInfo
+Vostok.ServiceDiscovery.Abstractions.IApplicationInfo.Application.get -> string
+Vostok.ServiceDiscovery.Abstractions.IApplicationInfo.Environment.get -> string
+Vostok.ServiceDiscovery.Abstractions.IApplicationInfo.Properties.get -> Vostok.ServiceDiscovery.Abstractions.IApplicationInfoProperties
+Vostok.ServiceDiscovery.Abstractions.IApplicationInfoProperties
+Vostok.ServiceDiscovery.Abstractions.IApplicationInfoProperties.Remove(string key) -> Vostok.ServiceDiscovery.Abstractions.IApplicationInfoProperties
+Vostok.ServiceDiscovery.Abstractions.IApplicationInfoProperties.Set(string key, string value) -> Vostok.ServiceDiscovery.Abstractions.IApplicationInfoProperties
+Vostok.ServiceDiscovery.Abstractions.IEnvironmentInfo
+Vostok.ServiceDiscovery.Abstractions.IEnvironmentInfo.Environment.get -> string
+Vostok.ServiceDiscovery.Abstractions.IEnvironmentInfo.ParentEnvironment.get -> string
+Vostok.ServiceDiscovery.Abstractions.IEnvironmentInfo.Properties.get -> Vostok.ServiceDiscovery.Abstractions.IEnvironmentInfoProperties
+Vostok.ServiceDiscovery.Abstractions.IEnvironmentInfoProperties
+Vostok.ServiceDiscovery.Abstractions.IEnvironmentInfoProperties.Remove(string key) -> Vostok.ServiceDiscovery.Abstractions.IEnvironmentInfoProperties
+Vostok.ServiceDiscovery.Abstractions.IEnvironmentInfoProperties.Set(string key, string value) -> Vostok.ServiceDiscovery.Abstractions.IEnvironmentInfoProperties
+Vostok.ServiceDiscovery.Abstractions.IReplicaInfo
+Vostok.ServiceDiscovery.Abstractions.IReplicaInfo.Application.get -> string
+Vostok.ServiceDiscovery.Abstractions.IReplicaInfo.Environment.get -> string
+Vostok.ServiceDiscovery.Abstractions.IReplicaInfo.Properties.get -> System.Collections.Generic.IReadOnlyDictionary<string, string>
+Vostok.ServiceDiscovery.Abstractions.IReplicaInfo.Replica.get -> string
+Vostok.ServiceDiscovery.Abstractions.IReplicaInfoExtensions
+Vostok.ServiceDiscovery.Abstractions.IServiceBeacon
+Vostok.ServiceDiscovery.Abstractions.IServiceBeacon.ReplicaInfo.get -> Vostok.ServiceDiscovery.Abstractions.IReplicaInfo
+Vostok.ServiceDiscovery.Abstractions.IServiceBeacon.Start() -> void
+Vostok.ServiceDiscovery.Abstractions.IServiceBeacon.Stop() -> void
+Vostok.ServiceDiscovery.Abstractions.IServiceDiscoveryManager
+Vostok.ServiceDiscovery.Abstractions.IServiceDiscoveryManager.GetAllApplicationsAsync(string environment) -> System.Threading.Tasks.Task<System.Collections.Generic.IReadOnlyList<string>>
+Vostok.ServiceDiscovery.Abstractions.IServiceDiscoveryManager.GetAllEnvironmentsAsync() -> System.Threading.Tasks.Task<System.Collections.Generic.IReadOnlyList<string>>
+Vostok.ServiceDiscovery.Abstractions.IServiceDiscoveryManager.GetAllReplicasAsync(string environment, string application) -> System.Threading.Tasks.Task<System.Collections.Generic.IReadOnlyList<string>>
+Vostok.ServiceDiscovery.Abstractions.IServiceDiscoveryManager.GetApplicationAsync(string environment, string application) -> System.Threading.Tasks.Task<Vostok.ServiceDiscovery.Abstractions.IApplicationInfo>
+Vostok.ServiceDiscovery.Abstractions.IServiceDiscoveryManager.GetEnvironmentAsync(string environment) -> System.Threading.Tasks.Task<Vostok.ServiceDiscovery.Abstractions.IEnvironmentInfo>
+Vostok.ServiceDiscovery.Abstractions.IServiceDiscoveryManager.GetReplicaAsync(string environment, string application, string replica) -> System.Threading.Tasks.Task<Vostok.ServiceDiscovery.Abstractions.IReplicaInfo>
+Vostok.ServiceDiscovery.Abstractions.IServiceDiscoveryManager.TryCreateApplicationAsync(Vostok.ServiceDiscovery.Abstractions.IApplicationInfo application) -> System.Threading.Tasks.Task<bool>
+Vostok.ServiceDiscovery.Abstractions.IServiceDiscoveryManager.TryCreateEnvironmentAsync(Vostok.ServiceDiscovery.Abstractions.IEnvironmentInfo environment) -> System.Threading.Tasks.Task<bool>
+Vostok.ServiceDiscovery.Abstractions.IServiceDiscoveryManager.TryCreatePermanentReplicaAsync(Vostok.ServiceDiscovery.Abstractions.IReplicaInfo replica) -> System.Threading.Tasks.Task<bool>
+Vostok.ServiceDiscovery.Abstractions.IServiceDiscoveryManager.TryDeleteApplicationAsync(string environment, string application) -> System.Threading.Tasks.Task<bool>
+Vostok.ServiceDiscovery.Abstractions.IServiceDiscoveryManager.TryDeleteEnvironmentAsync(string environment) -> System.Threading.Tasks.Task<bool>
+Vostok.ServiceDiscovery.Abstractions.IServiceDiscoveryManager.TryDeletePermanentReplicaAsync(string environment, string application, string replica) -> System.Threading.Tasks.Task<bool>
+Vostok.ServiceDiscovery.Abstractions.IServiceDiscoveryManager.TryUpdateApplicationPropertiesAsync(string environment, string application, System.Func<Vostok.ServiceDiscovery.Abstractions.IApplicationInfoProperties, Vostok.ServiceDiscovery.Abstractions.IApplicationInfoProperties> updateFunc) -> System.Threading.Tasks.Task<bool>
+Vostok.ServiceDiscovery.Abstractions.IServiceDiscoveryManager.TryUpdateEnvironmentParentAsync(string environment, string newParent) -> System.Threading.Tasks.Task<bool>
+Vostok.ServiceDiscovery.Abstractions.IServiceDiscoveryManager.TryUpdateEnvironmentPropertiesAsync(string environment, System.Func<Vostok.ServiceDiscovery.Abstractions.IEnvironmentInfoProperties, Vostok.ServiceDiscovery.Abstractions.IEnvironmentInfoProperties> update) -> System.Threading.Tasks.Task<bool>
+Vostok.ServiceDiscovery.Abstractions.IServiceLocator
+Vostok.ServiceDiscovery.Abstractions.IServiceLocator.Locate(string environment, string application) -> Vostok.ServiceDiscovery.Abstractions.IServiceTopology
+Vostok.ServiceDiscovery.Abstractions.IServiceTopology
+Vostok.ServiceDiscovery.Abstractions.IServiceTopology.Properties.get -> Vostok.ServiceDiscovery.Abstractions.IServiceTopologyProperties
+Vostok.ServiceDiscovery.Abstractions.IServiceTopology.Replicas.get -> System.Collections.Generic.IReadOnlyList<System.Uri>
+Vostok.ServiceDiscovery.Abstractions.IServiceTopologyProperties
+Vostok.ServiceDiscovery.Abstractions.IServiceTopologyProperties.Remove(string key) -> Vostok.ServiceDiscovery.Abstractions.IServiceTopologyProperties
+Vostok.ServiceDiscovery.Abstractions.IServiceTopologyProperties.Set(string key, string value) -> Vostok.ServiceDiscovery.Abstractions.IServiceTopologyProperties
+Vostok.ServiceDiscovery.Abstractions.Models.ApplicationInfo
+Vostok.ServiceDiscovery.Abstractions.Models.ApplicationInfo.Application.get -> string
+Vostok.ServiceDiscovery.Abstractions.Models.ApplicationInfo.ApplicationInfo(string environment, string application, System.Collections.Generic.IReadOnlyDictionary<string, string> properties) -> void
+Vostok.ServiceDiscovery.Abstractions.Models.ApplicationInfo.Environment.get -> string
+Vostok.ServiceDiscovery.Abstractions.Models.ApplicationInfo.Properties.get -> Vostok.ServiceDiscovery.Abstractions.IApplicationInfoProperties
+Vostok.ServiceDiscovery.Abstractions.Models.EnvironmentInfo
+Vostok.ServiceDiscovery.Abstractions.Models.EnvironmentInfo.Environment.get -> string
+Vostok.ServiceDiscovery.Abstractions.Models.EnvironmentInfo.EnvironmentInfo(string environment, string parentEnvironment, System.Collections.Generic.IReadOnlyDictionary<string, string> properties) -> void
+Vostok.ServiceDiscovery.Abstractions.Models.EnvironmentInfo.ParentEnvironment.get -> string
+Vostok.ServiceDiscovery.Abstractions.Models.EnvironmentInfo.Properties.get -> Vostok.ServiceDiscovery.Abstractions.IEnvironmentInfoProperties
+Vostok.ServiceDiscovery.Abstractions.Models.ReplicaInfo
+Vostok.ServiceDiscovery.Abstractions.Models.ReplicaInfo.Application.get -> string
+Vostok.ServiceDiscovery.Abstractions.Models.ReplicaInfo.Environment.get -> string
+Vostok.ServiceDiscovery.Abstractions.Models.ReplicaInfo.Properties.get -> System.Collections.Generic.IReadOnlyDictionary<string, string>
+Vostok.ServiceDiscovery.Abstractions.Models.ReplicaInfo.Replica.get -> string
+Vostok.ServiceDiscovery.Abstractions.Models.ReplicaInfo.ReplicaInfo(string environment, string application, string replica, System.Collections.Generic.Dictionary<string, string> properties = null) -> void
+Vostok.ServiceDiscovery.Abstractions.Models.ReplicaInfo.SetProperty(string key, string value) -> void
+Vostok.ServiceDiscovery.Abstractions.Models.ReplicaTagKind
+Vostok.ServiceDiscovery.Abstractions.Models.ReplicaTagKind.Ephemeral = 0 -> Vostok.ServiceDiscovery.Abstractions.Models.ReplicaTagKind
+Vostok.ServiceDiscovery.Abstractions.Models.ReplicaTagKind.Persistent = 1 -> Vostok.ServiceDiscovery.Abstractions.Models.ReplicaTagKind
+Vostok.ServiceDiscovery.Abstractions.Models.ServiceTopology
+Vostok.ServiceDiscovery.Abstractions.Models.ServiceTopology.Properties.get -> Vostok.ServiceDiscovery.Abstractions.IServiceTopologyProperties
+Vostok.ServiceDiscovery.Abstractions.Models.ServiceTopology.Replicas.get -> System.Collections.Generic.IReadOnlyList<System.Uri>
+Vostok.ServiceDiscovery.Abstractions.Models.TagCollection
+Vostok.ServiceDiscovery.Abstractions.Models.TagCollection.Add(string key) -> void
+Vostok.ServiceDiscovery.Abstractions.Models.TagCollection.Add(string key, string value) -> void
+Vostok.ServiceDiscovery.Abstractions.Models.TagCollection.Clear() -> void
+Vostok.ServiceDiscovery.Abstractions.Models.TagCollection.ContainsKey(string key) -> bool
+Vostok.ServiceDiscovery.Abstractions.Models.TagCollection.Count.get -> int
+Vostok.ServiceDiscovery.Abstractions.Models.TagCollection.Equals(Vostok.ServiceDiscovery.Abstractions.Models.TagCollection other) -> bool
+Vostok.ServiceDiscovery.Abstractions.Models.TagCollection.GetEnumerator() -> System.Collections.Generic.IEnumerator<System.Collections.Generic.KeyValuePair<string, string>>
+Vostok.ServiceDiscovery.Abstractions.Models.TagCollection.Keys.get -> System.Collections.Generic.ICollection<string>
+Vostok.ServiceDiscovery.Abstractions.Models.TagCollection.Remove(string key) -> bool
+Vostok.ServiceDiscovery.Abstractions.Models.TagCollection.TagCollection() -> void
+Vostok.ServiceDiscovery.Abstractions.Models.TagCollection.TagCollection(System.Collections.Generic.IDictionary<string, string> tagsCollection) -> void
+Vostok.ServiceDiscovery.Abstractions.Models.TagCollection.this[string key].get -> string
+Vostok.ServiceDiscovery.Abstractions.Models.TagCollection.this[string key].set -> void
+Vostok.ServiceDiscovery.Abstractions.Models.TagCollection.TryGetValue(string key, out string value) -> bool
+Vostok.ServiceDiscovery.Abstractions.Models.TagCollection.Values.get -> System.Collections.Generic.ICollection<string>
+Vostok.ServiceDiscovery.Abstractions.Models.TagsPropertyKey
+Vostok.ServiceDiscovery.Abstractions.Models.TagsPropertyKey.ReplicaName.get -> string
+Vostok.ServiceDiscovery.Abstractions.Models.TagsPropertyKey.TagKind.get -> string
+Vostok.ServiceDiscovery.Abstractions.Models.TagsPropertyKey.TagsPropertyKey(string replicaName, string tagKind) -> void
